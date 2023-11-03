@@ -1,0 +1,117 @@
+﻿@model MVC.Models.Student
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    html {
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+    }</style>
+<title></title>
+<link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+<script src="https://kendo.cdn.telerik.com/2023.2.829/js/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<script src="https://kendo.cdn.telerik.com/2023.2.829/js/kendo.all.min.js"></script>
+
+
+<style>
+    #bgcolor {
+        background-color: #d099de;
+        color: white;
+        margin: 3%;
+        padding: 3%;
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin:auto;
+    }
+
+   
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+<div id="bgcolor" class="col-md-6">
+    <h1>Register</h1>
+
+   
+    <hr />
+    <div class="row">
+        <div>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Age" class="control-label"></label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Standard" class="control-label"></label>
+                    <input asp-for="Standard" class="form-control" />
+                    <span asp-validation-for="Standard" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="city" class="control-label"></label>
+                    <input asp-for="city" id="kd-place-chooser" class="form-control" />
+                    <span asp-validation-for="city" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <input type="submit" value="Create" class="btn btn-outline-light" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+ </div>
+ <script>
+
+    //----------------kendo-dropbox-----------------
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { CityID: 1, CityName: "Bhopal" },
+            { CityID: 2, CityName: "Indore" },
+            { CityID: 3, CityName: "Jaipur" },
+            { CityID: 4, CityName: "Pune" },
+            { CityID: 5, CityName: "Banglore" },
+            { CityID: 6, CityName: "Hydrabad" },
+
+        ],
+        sort: { field: "CityName", dir: "asc" }
+    });
+    $("#kd-place-chooser").kendoDropDownList({
+        filter: "contains",
+        optionLabel: 'Please select city...',
+        dataTextField: "CityName",
+        dataValueField: "CityName",
+        dataSource: dataSource
+    });
+ </script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

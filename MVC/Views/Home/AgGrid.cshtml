@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MVC.Models.Student>                                                                                                                                  
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ag-Grid Basic Example</title>
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="myGrid" style="height: 200px; width:500px;" class="ag-theme-alpine"></div>
+</body>
+</html>
+
+
+
+<script>
+    var columnDefs = [
+        { headerName: "name", field: "name" },
+       
+    ];
+
+    // specify the data
+    var rowData = @Html.Raw(Json.Serialize(Model))
+
+        // let the grid know which columns and what data to use
+    var gridOptions = {
+
+        columnDefs: columnDefs,
+        rowData: rowData,
+
+        // default ColDef, gets applied to every column
+        defaultColDef: {
+            // set the default column width
+            width: 150,
+            // make every column editable
+            editable: true,
+            // make every column use 'text' filter by default
+            filter: 'agTextColumnFilter',
+            // enable floating filters by default
+            floatingFilter: true,
+            // make columns resizable
+            resizable: true,
+            // disable cell data types
+            cellDataType: false,
+        },
+    };
+
+
+
+
+    // setup the grid after the page has finished loading
+    document.addEventListener('DOMContentLoaded', function () {
+        var gridDiv = document.querySelector('#myGrid');
+        new agGrid.Grid(gridDiv, gridOptions);
+    });
+
+
+</script>
